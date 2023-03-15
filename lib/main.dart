@@ -1,16 +1,71 @@
+import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/components.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:lottie/lottie.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const SplashScreen());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
-  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Splash Screen',
+      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(
+      const Duration(seconds: 3),
+      () => Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const MyHomePage(),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(160.0),
+          color: Colors.white,
+          child: Lottie.asset(
+            'assets/lottie/instagram-logo.json',
+            width: 100,
+            height: 100,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

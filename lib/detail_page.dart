@@ -29,7 +29,7 @@ class DetailPage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const MyApp()),
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
                 );
               },
               icon: const Icon(CupertinoIcons.paperplane),
