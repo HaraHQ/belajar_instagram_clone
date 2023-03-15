@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:formatted_text/formatted_text.dart';
-import 'package:instagram_clone/detail_page.dart';
+import 'package:instagram_clone/components.dart';
+import 'package:badges/badges.dart' as badges;
 
 void main() {
   runApp(const MyApp());
@@ -32,15 +32,65 @@ class MyApp extends StatelessWidget {
             ),
           ),
           actions: <Widget>[
-            IconButton(
-                onPressed: () {}, icon: const Icon(CupertinoIcons.plus_square)),
+            Padding(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: badges.Badge(
+                showBadge: true,
+                position: badges.BadgePosition.topEnd(top: 0, end: 5),
+                badgeContent: const Text(
+                  '3',
+                  style: TextStyle(color: Colors.white),
+                ),
+                badgeStyle: const badges.BadgeStyle(
+                  elevation: 0,
+                  badgeColor: Colors.red,
+                ),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(CupertinoIcons.plus_square),
+                ),
+              ),
+            ),
             const SizedBox(width: 10.0),
-            IconButton(
-                onPressed: () {}, icon: const Icon(CupertinoIcons.heart)),
+            Padding(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: badges.Badge(
+                showBadge: false,
+                position: badges.BadgePosition.topEnd(top: 0, end: 5),
+                badgeContent: const Text(
+                  '3',
+                  style: TextStyle(color: Colors.white),
+                ),
+                badgeStyle: const badges.BadgeStyle(
+                  elevation: 0,
+                  badgeColor: Colors.red,
+                ),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(CupertinoIcons.heart),
+                ),
+              ),
+            ),
             const SizedBox(width: 10.0),
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(CupertinoIcons.chat_bubble_text)),
+            Padding(
+              padding: const EdgeInsets.only(top: 3.0),
+              child: badges.Badge(
+                showBadge: true,
+                position: badges.BadgePosition.topEnd(top: 0, end: 5),
+                badgeContent: const Text(
+                  '3',
+                  style: TextStyle(color: Colors.white),
+                ),
+                badgeStyle: const badges.BadgeStyle(
+                  elevation: 0,
+                  badgeColor: Colors.red,
+                ),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(CupertinoIcons.chat_bubble_text),
+                ),
+              ),
+            ),
             const SizedBox(width: 10.0),
           ],
         ),
@@ -49,8 +99,16 @@ class MyApp extends StatelessWidget {
           child: Column(
             children: [
               const Stories(),
-              const SizedBox(
-                height: 20.0,
+              Container(
+                height: 1.0,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    top: BorderSide(
+                      color: Colors.black12,
+                      width: 1,
+                    ),
+                  ),
+                ),
               ),
               Container(
                 alignment: Alignment.topLeft,
@@ -61,56 +119,70 @@ class MyApp extends StatelessWidget {
                     url:
                         'https://images.pexels.com/photos/213780/pexels-photo-213780.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
                     likes: 999,
+                    liked: true,
                     postId: 1,
                     postComment: [],
+                    bookmarked: true,
                   ),
                   PostCard(
                     userName: 'cuthawaaulia',
                     url:
                         'https://images.pexels.com/photos/15554361/pexels-photo-15554361.jpeg?auto=compress&cs=tinysrgb&w=500',
                     likes: 8888,
+                    liked: true,
                     postId: 2,
                     postComment: [],
+                    bookmarked: false,
                   ),
                   PostCard(
                     userName: 'anissafadilah',
                     url:
                         'https://images.pexels.com/photos/9437538/pexels-photo-9437538.jpeg?auto=compress&cs=tinysrgb&w=500',
                     likes: 1200,
+                    liked: false,
                     postId: 3,
                     postComment: [],
+                    bookmarked: false,
                   ),
                   PostCard(
                     userName: 'infoserang',
                     url:
                         'https://images.pexels.com/photos/6858664/pexels-photo-6858664.jpeg?auto=compress&cs=tinysrgb&w=500',
                     likes: 10,
+                    liked: false,
                     postId: 4,
                     postComment: [],
+                    bookmarked: true,
                   ),
                   PostCard(
                     userName: 'cutsarahnajja',
                     url:
                         'https://images.pexels.com/photos/5461575/pexels-photo-5461575.jpeg?auto=compress&cs=tinysrgb&w=500',
                     likes: 111,
+                    liked: true,
                     postId: 5,
                     postComment: [],
+                    bookmarked: false,
                   ),
                   PostCard(
                     userName: 'cuthawaaulia',
                     url:
                         'https://images.pexels.com/photos/9828304/pexels-photo-9828304.jpeg?auto=compress&cs=tinysrgb&w=500',
                     likes: 8888,
+                    liked: false,
                     postId: 6,
                     postComment: [],
+                    bookmarked: false,
                   ),
                   PostCard(
                     userName: 'cutrumaisha',
                     url:
                         'https://images.pexels.com/photos/15794810/pexels-photo-15794810.jpeg?auto=compress&cs=tinysrgb&w=500',
                     likes: 10000,
+                    liked: true,
                     postId: 7,
                     postComment: [],
+                    bookmarked: true,
                   ),
                 ]),
               )
@@ -118,257 +190,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class PostCard extends StatelessWidget {
-  final dynamic userName;
-  final dynamic url;
-  final dynamic likes;
-  final dynamic postId;
-  final dynamic postComment;
-
-  const PostCard(
-      {required this.userName,
-      required this.url,
-      required this.likes,
-      required this.postId,
-      required this.postComment,
-      super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
-        width: double.infinity,
-        child: Column(
-          children: <Widget>[
-            PostUserInfo(
-              userName: userName,
-            ),
-            Image.network(url),
-            PostActions(id: postId),
-            const PostComments(),
-            const PostFooter(),
-          ],
-        ),
-      ),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const DetailPage()),
-        );
-      },
-    );
-  }
-}
-
-class PostFooter extends StatelessWidget {
-  const PostFooter({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 5.0,
-        left: 15.0,
-        right: 15.0,
-        bottom: 15.0,
-      ),
-      child: Row(children: const <Widget>[
-        Text(
-          '11 hours ago',
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.black45,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        Text(
-          ' • ',
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.black45,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        Text(
-          'See Translation',
-          style: TextStyle(
-            fontSize: 12,
-            color: Colors.black87,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ]),
-    );
-  }
-}
-
-class PostComments extends StatelessWidget {
-  const PostComments({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 15.0,
-        right: 15.0,
-      ),
-      child: Container(
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const <Widget>[
-            Text(
-              '999 likes',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            FormattedText(
-              '*Hawa* Abi, hawa mau dong ini... 💖',
-              style: TextStyle(
-                fontSize: 14,
-              ),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            FormattedText(
-              '*Rixkiansyaaaargh* Siap pincres! 🤗💯',
-              style: TextStyle(
-                fontSize: 14,
-              ),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class PostActions extends StatelessWidget {
-  final dynamic id;
-  const PostActions({required this.id, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(3.0),
-          child: IconButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                        title: const Text('like'),
-                        content: Text(id),
-                      ));
-            },
-            icon: const Icon(CupertinoIcons.heart),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(3.0),
-          child: IconButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                        title: const Text('add comment'),
-                        content: Text(id),
-                      ));
-            },
-            icon: const Icon(CupertinoIcons.chat_bubble),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(3.0),
-          child: IconButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                        title: const Text('share this post'),
-                        content: Text(id),
-                      ));
-            },
-            icon: const Icon(CupertinoIcons.paperplane),
-          ),
-        ),
-        const Spacer(),
-        Padding(
-          padding: const EdgeInsets.all(3.0),
-          child: IconButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (ctx) => AlertDialog(
-                        title: const Text('bookmarked'),
-                        content: Text(id),
-                      ));
-            },
-            icon: const Icon(CupertinoIcons.bookmark),
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class PostUserInfo extends StatelessWidget {
-  final dynamic userName;
-  const PostUserInfo({required this.userName, super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  border: Border.all(
-                    strokeAlign: BorderSide.strokeAlignOutside,
-                    width: 2.0,
-                    color: Colors.purple,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  child: Image.network(
-                    "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010",
-                    width: 36.0,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 5.0,
-            ),
-            Text(
-              userName,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-      ],
     );
   }
 }
@@ -418,65 +239,6 @@ class Stories extends StatelessWidget {
               url:
                   'https://thumbs.dreamstime.com/b/happy-smiling-young-woman-face-portrait-people-female-business-concept-65610841.jpg'),
         ],
-      ),
-    );
-  }
-}
-
-class StoryCircle extends StatelessWidget {
-  final Color warnaCirle;
-  final dynamic textCircle;
-  final dynamic url;
-
-  const StoryCircle(
-      {required this.warnaCirle,
-      required this.textCircle,
-      required this.url,
-      super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: GestureDetector(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  border: Border.all(
-                    strokeAlign: BorderSide.strokeAlignOutside,
-                    width: 2.0,
-                    color: Colors.purple,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(100)),
-                  child: Image.network(
-                    url,
-                    width: 62.0,
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10.0,
-            ),
-            Text(textCircle,
-                style: const TextStyle(fontSize: 13, letterSpacing: 1.4))
-          ],
-        ),
-        onTap: () {
-          showDialog(
-              context: context,
-              builder: (ctx) => AlertDialog(
-                    title: const Text('test'),
-                    content: Text(textCircle),
-                  ));
-        },
       ),
     );
   }
